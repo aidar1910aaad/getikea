@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { UserContext } from '../components/UserContext';
 import TopBar from '../components/TopBar';
 import Footer from '../components/Footer';
@@ -57,12 +58,16 @@ const LoginPage: React.FC = () => {
               />
               Запомнить меня
             </label>
-            <a href="/forgot-password" className={styles.forgotPassword}>Восстановление пароля</a>
+            <Link href="/forgot-password" passHref>
+              <a className={styles.forgotPassword}>Восстановление пароля</a>
+            </Link>
           </div>
           <div className={styles.formFooter}>
             <div className={styles.registerLink}>
               <span>Нет учетной записи?</span>
-              <a href="/signup">Зарегистрироваться</a>
+              <Link href="/signup" passHref>
+                <a>Зарегистрироваться</a>
+              </Link>
             </div>
             <button type="submit" className={styles.loginButton}>Войти</button>
           </div>
