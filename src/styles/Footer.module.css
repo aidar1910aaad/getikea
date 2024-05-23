@@ -1,0 +1,32 @@
+.footer {
+    padding: 1rem 2rem;
+    background-color: #003F88; 
+    color: white;
+    text-align: center;
+    border-top: 2px solid #00509D;
+  }
+  
+  .links {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  
+  .links li {
+    display: inline;
+  }
+  
+  .links a {
+    text-decoration: none;
+    color: white;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  
+  .links a:hover {
+    border-bottom: 1px solid #FDC503;
+  }
+  

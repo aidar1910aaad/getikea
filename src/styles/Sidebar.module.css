@@ -1,0 +1,66 @@
+.sidebar {
+    width: 20%;
+    padding: 1rem;
+    background-color: #003F88;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .addButton, .addBalanceButton {
+    background-color: #FDC503;
+    color: #003F88;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .balance {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .separator {
+    border: 0;
+    height: 1px;
+    background-color: #00509D;
+    margin: 1rem 0;
+  }
+  
+  .navList {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .navItem {
+    margin: 0.5rem 0;
+  }
+  
+  .navLink, .menuButton {
+    color: white;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    text-align: left;
+    padding: 0;
+  }
+  
+  .navLink:hover, .menuButton:hover {
+    text-decoration: underline;
+  }
+  
+  .submenu {
+    list-style: none;
+    padding-left: 1rem;
+    margin: 0.5rem 0 0;
+  }
+  
+  .submenuItem {
+    margin: 0.5rem 0;
+  }
+  

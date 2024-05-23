@@ -1,0 +1,23 @@
+.rightPanel {
+    width: 20%;
+    padding: 1rem;
+    background-color: #003F88;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .rightPanel .block {
+    background-color: #00509D;
+    padding: 1rem;
+    border-radius: 4px;
+  }
+  
+  .rightPanel .block h3 {
+    margin-top: 0;
+  }
+  
+  .rightPanel .block p {
+    margin: 0.5rem 0;
+  }
