@@ -1,0 +1,139 @@
+/* src/styles/ParcelsPage.module.css */
+.container {
+  padding: 20px;
+}
+
+.parcelsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.parcel {
+  width: 100%;
+  height: 150px;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.parcel:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.parcelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.statusCircle {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #ddd;
+  text-align: center;
+  line-height: 20px;
+  color: white;
+  font-size: 12px;
+}
+
+.parcelContent {
+  flex-grow: 1;
+  margin-top: 10px;
+}
+
+.parcelContent p {
+  margin: 5px 0;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  max-width: 500px;
+  width: 100%;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.75);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalContent {
+  margin-top: 10px;
+}
+
+.items {
+  margin-top: 10px;
+}
+
+.item {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.buttons button {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #FDC503;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.buttons button:hover {
+  background-color: #e5a800;
+}
+
+@media (max-width: 768px) {
+  .parcel {
+    height: auto;
+  }
+
+  .parcelContent p {
+    margin: 10px 0;
+  }
+
+  .modal {
+    padding: 10px;
+    max-width: 90%;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .buttons button {
+    width: 100%;
+    padding: 10px;
+  }
+}

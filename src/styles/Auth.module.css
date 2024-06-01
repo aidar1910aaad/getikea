@@ -1,118 +1,157 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #F5F5F5;
+  width: 100%;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.authForm {
+  background-color: #FFFFFF;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  min-width: 400px;
+}
+
+.authInput {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  margin: 1rem 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.rememberMe {
+  display: flex;
+  align-items: center;
+}
+
+.forgotPassword {
+  color: #003F88;
+  cursor: pointer;
+}
+
+.formFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.registerLink {
+  color: #003F88;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.registerLink span {
+  display: block;
+}
+
+.loginButton {
+  background-color: #FDC503;
+  color: black;
+  font-size: 16px;
+  min-width: 150px;
+  font-family: 'Nunito';
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 50px;
+}
+
+.loginButton:hover {
+  background-color: #cb9f00;
+}
+
+.nolink {
+  text-decoration: none;
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
   .authForm {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    background-color: #FDC503;
-    border: 1px solid #00509D;
-    border-radius: 8px;
-    margin: 1rem auto; 
-    max-width: 400px;
-    width: 100%; 
+    min-width: 100%;
+    padding: 1rem;
   }
-  
-  .authForm h1 {
-    margin-bottom: 1rem;
-  }
-  
-  .authForm form {
-    display: flex;
+
+  .formFooter {
     flex-direction: column;
     gap: 1rem;
-    width: 100%;
   }
-  
-  .authInput {
-    border: 1px solid grey;
-    height: 40px;
-    font-size: large;
-    padding: 0.5rem;
-    border-radius: 4px;
-    position: relative;
-    background: none;
-    outline: none;
-    transition: all 0.2s ease;
-  }
-  
-  .authInput::placeholder {
-    color: grey;
-    font-weight: 300;
-    transition: all 0.2s ease;
-  }
-  
-  .authInput:focus {
-    border-color: grey; 
-    outline: none;
-  }
-  
-  .authInput:focus::placeholder {
-    transform: translateY(-20px);
-    font-size: 0.8rem;
-    color: grey;
-    opacity: 0.7;
-  }
-  
-  .options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-  
-  .rememberMe {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  
-  .forgotPassword {
-    color: #003F88;
-    text-decoration: none;
-  }
-  
-  .forgotPassword:hover {
-    text-decoration: underline;
-  }
-  
-  .formFooter {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-  
-  .registerLink {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-  }
-  
-  .registerLink a {
-    color: #003F88;
-    text-decoration: none;
-  }
-  
-  .registerLink a:hover {
-    text-decoration: underline;
-  }
-  
+
   .loginButton {
-    padding: 0.5rem 1rem;
-    background-color: #003F88;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    width: 100%;
+    padding: 10px;
   }
-  
-  .loginButton:hover {
-    background-color: #00509D;
+}
+
+@media (max-width: 480px) {
+  .authForm {
+    padding: 1rem;
+    margin-top: 80px;
   }
-  
+
+  .options {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .formFooter {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .loginButton {
+    width: 100%;
+    height: auto;
+  }
+}
+.success {
+  color: green;
+  margin-bottom: 1rem;
+}
+
+.error {
+  color: red;
+  margin-bottom: 1rem;
+}
+
+.passwordContainer {
+  position: relative;
+}
+
+.showPasswordButton {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #0070f3;
+}

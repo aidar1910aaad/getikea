@@ -1,0 +1,107 @@
+/* src/styles/Modal.module.css */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 100%;
+  position: relative;
+  max-height: 80vh;
+  overflow: hidden;
+}
+
+.modalContent {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.inputGroup {
+  margin-bottom: 1rem;
+}
+
+.inputGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.inputGroup input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.priceInput {
+  display: flex;
+  align-items: center;
+}
+
+.priceInput input {
+  flex: 1;
+  padding-right: 2rem;
+}
+
+.priceButtons {
+  display: flex;
+  flex-direction: column;
+}
+
+.priceButtons button {
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.buttons button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.buttons button:first-child {
+  background-color: #f0f0f0;
+}
+
+.buttons button:last-child {
+  background-color: #00509d;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .modal {
+    padding: 1rem;
+    max-width: 90%;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .buttons button {
+    width: 100%;
+    padding: 10px;
+  }
+}

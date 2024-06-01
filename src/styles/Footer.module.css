@@ -1,32 +1,64 @@
 .footer {
-    padding: 1rem 2rem;
-    background-color: #003F88; 
-    color: white;
+  padding: 1rem 2rem;
+  background-color: #003F88;
+  color: white;
+  text-align: center;
+  border-top: 2px solid #00509D;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.links {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap; /* Позволяет ссылкам переноситься на новую строку на маленьких экранах */
+}
+
+.links li {
+  display: inline;
+}
+
+.links a {
+  text-decoration: none;
+  color: white;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.links a:hover {
+  border-bottom: 1px solid #FDC503;
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+  .footer {
+    padding: 1rem;
     text-align: center;
-    border-top: 2px solid #00509D;
   }
-  
+
   .links {
-    list-style: none;
-    padding: 0;
-    margin: 1rem 0 0;
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
+    gap: 1rem;
   }
-  
+}
+
+@media (max-width: 480px) {
+  .footer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .links {
+    flex-direction: column;
+    align-items: center;
+  }
+
   .links li {
-    display: inline;
+    margin: 0.5rem 0;
   }
-  
-  .links a {
-    text-decoration: none;
-    color: white;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.2s;
-  }
-  
-  .links a:hover {
-    border-bottom: 1px solid #FDC503;
-  }
-  
+}

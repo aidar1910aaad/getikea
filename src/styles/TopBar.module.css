@@ -1,37 +1,70 @@
 .topBar {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem 2rem;
-    background-color: #003F88; 
-    color: white;
-    border-bottom: 2px solid #00509D;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #003F88;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #FDC503;
+  text-decoration: none;
+  cursor: pointer;
+}
+.logo a{
+
+  text-decoration: none;
+}
+
+.links {
+  display: flex;
+  gap: 1rem;
+  white-space: nowrap; 
+  padding-right: 50px;/* Предотвращает перенос ссылок */
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+  cursor: pointer;
   
-  .left {
-    display: flex;
+}
+
+.nolink{
+  text-decoration: none;
+}
+
+
+.link:hover {
+  border-bottom: 1px solid #FDC503;
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+  .topBar {
+    flex-direction: column;
+    padding: 0.5rem 1rem;
+  }
+
+  .links {
+    flex-direction: column;
     align-items: center;
+    width: 100%;
+    padding-right: 0px;
   }
-  
-  .right {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-  }
-  
-  .companyName {
-    color: white;
-    text-decoration: none;
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
+
   .link {
-    color: white;
-    text-decoration: none;
-    font-size: 1rem;
+    margin: 0.5rem 0;
   }
-  
-  .link:hover {
-    text-decoration: underline;
-  }
-  
+}

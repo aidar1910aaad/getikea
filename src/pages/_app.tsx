@@ -1,4 +1,4 @@
-import React from 'react';
+// pages/_app.tsx
 import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import { UserProvider } from '../components/UserContext';
@@ -9,7 +9,6 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();
   const noLayoutPaths = ['/login', '/signup'];
 
-  // Проверяем, нужно ли использовать Layout
   const isNoLayout = noLayoutPaths.includes(router.pathname);
 
   return (
