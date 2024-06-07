@@ -4,9 +4,11 @@ export interface Item {
   productLink: string;
   quantity: number;
   description: string;
+  imageKey?: string;
 }
 
 export interface Parcel {
+  imageKey: any;
   id: number;
   trackingNumber: string;
   userId: number;
