@@ -1,4 +1,4 @@
-/* src/styles/ParcelsPage.module.css */
+/* styles/ParcelsPage.module.css */
 .container {
   padding: 20px;
 }
@@ -11,13 +11,12 @@
 
 .parcel {
   width: 100%;
-  height: 150px;
   border: 1px solid #ddd;
   border-radius: 15px;
   padding: 10px;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
+  align-items: flex-start;
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -28,60 +27,105 @@
 }
 
 .parcelHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  margin-bottom: 10px;
 }
 
 .statusCircle {
   display: inline-block;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #ddd;
+  width: auto;
+  padding: 2px 8px;
+  border-radius: 8px;
+  background-color: #b1b1b1;
   text-align: center;
   line-height: 20px;
   color: white;
-  font-size: 12px;
+  font-size: 10px;
+  white-space: nowrap;
 }
 
-.parcelContent {
+.parcelDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   flex-grow: 1;
-  margin-top: 10px;
 }
 
-.parcelContent p {
-  margin: 5px 0;
+.parcelId {
+  margin-top: 5px;
 }
 
-.modal {
-  background: white;
-  padding: 20px;
-  max-width: 500px;
-  width: 100%;
+.parcelImage {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
   border-radius: 10px;
-  position: relative;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.parcelImagePlaceholder {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  color: #aaa;
+  text-align: center;
+  font-size: 12px;
+  padding: 10px;
+}
+
+/* styles/Modal.module.css */
 .overlay {
-  background: rgba(0, 0, 0, 0.75);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  max-width: 600px;
+  width: 100%;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
 .modalContent {
   margin-top: 10px;
 }
 
+.flex {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.descr {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  min-width: calc(33% - 20px);
+  text-align: left;
+}
+
 .items {
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .item {
@@ -104,22 +148,55 @@
   border: none;
   cursor: pointer;
   border-radius: 5px;
-  background-color: #FDC503;
+  background-color: #007bff;
   color: white;
   transition: background-color 0.3s;
 }
 
 .buttons button:hover {
-  background-color: #e5a800;
+  background-color: #0056b3;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.pagination button:hover {
+  background-color: #f0f0f0;
+}
+
+.pagination .active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
 }
 
 @media (max-width: 768px) {
   .parcel {
-    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .parcelContent p {
-    margin: 10px 0;
+  .parcelContent {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .parcelImage {
+    margin-top: 10px;
   }
 
   .modal {
@@ -133,6 +210,16 @@
   }
 
   .buttons button {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .pagination {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .pagination button {
     width: 100%;
     padding: 10px;
   }

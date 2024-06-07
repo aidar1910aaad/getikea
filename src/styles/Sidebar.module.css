@@ -13,13 +13,20 @@
   background-color: #FDC503;
   color: #003F88;
   border: none;
+  margin-top: 10px;
   padding: 0.5rem 1rem;
   font-family: 'Nunito';
-  font-weight: 700;
+  font-weight: 300;
   height: 50px;
   font-size: large;
   cursor: pointer;
   border-radius: 4px;
+
+  transition: 0.5s;
+}
+
+.addButton:hover{
+  background-color: #ffd94f;
 }
 
 .balance {
@@ -77,6 +84,11 @@
 @media (max-width: 768px) {
   .sidebar {
     width: 100%;
+  }
+  .addButton{
+    width: 60%;
+    text-align: center;
+    margin: 10 auto;
   }
 
   .navLink, .menuButton {

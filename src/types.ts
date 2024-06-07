@@ -1,7 +1,6 @@
-
 export interface Item {
-  id: number;
-  parcelId: number;
+  id?: number;
+  parcelId?: number;
   productLink: string;
   quantity: number;
   description: string;
@@ -22,4 +21,5 @@ export interface Parcel {
   recipient?: string;
   iin?: string;
   fio?: string;
+  parcelKey: string;
 }

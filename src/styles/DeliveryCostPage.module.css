@@ -1,0 +1,186 @@
+.container {
+  margin: 20px;
+}
+
+.header {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.description {
+  margin-bottom: 20px;
+}
+
+.weightCostContainer {
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+  position: relative;
+  margin-bottom: 50px;
+}
+
+.valueContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.leftValue, .rightValue {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.rightValue {
+  align-items: flex-end;
+}
+
+.valueLabel {
+  font-size: 18px;
+  color: #333;
+}
+
+.value {
+  font-size: 36px;
+  font-weight: bold;
+  color: #333;
+}
+
+.label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.rangeInput {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.iconsContainer {
+  display: flex;
+  justify-content: flex-start; /* Изменено с center на flex-start */
+  overflow: hidden;
+  position: relative;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.iconsWrapper {
+  display: flex;
+  transition: transform 0.3s ease-out;
+}
+
+.iconItem {
+  text-align: center;
+  transition: transform 0.2s, opacity 0.2s;
+  margin: 0 5px;
+  flex: 0 0 100px;
+  opacity: 0.5;
+}
+
+.iconImage {
+  font-size: 30px;
+  color: #333;
+}
+
+.iconText {
+  margin-top: 5px;
+  font-size: 10px;
+}
+
+.iconItem.active {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+.courierCostContainer {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+}
+
+.courierCostLabel {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.courierOptions {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.courierOption {
+  background-color: #f0f0f0;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 5px;
+  flex: 1; /* Делает кнопки равными по ширине */
+  text-align: center;
+}
+
+.courierOption:hover {
+  background-color: #ddd;
+}
+
+.activeOption {
+  background-color: #007bff;
+  color: white;
+}
+
+.fromTo {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.fromToItem {
+  width: 48%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.calculateContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.calculateButton {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  flex: 1;
+  margin-right: 20px;
+}
+
+.calculateButton:hover {
+  background-color: #0056b3;
+}
+
+.totalCost {
+  font-size: 16px;
+  color: #333;
+  flex: 1;
+  text-align: right;
+}

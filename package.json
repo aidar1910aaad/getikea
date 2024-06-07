@@ -13,6 +13,7 @@
     "react": "^18",
     "react-blur": "^1.1.1",
     "react-dom": "^18",
+    "react-icons": "^5.2.1",
     "react-modal": "^3.16.1",
     "uuid": "^9.0.1"
   },

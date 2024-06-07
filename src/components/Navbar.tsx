@@ -5,29 +5,20 @@ import styles from '../styles/Navbar.module.css';
 
 const Navbar: React.FC = () => {
   const { user, logout } = useUser();
-  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <nav className={styles.navbar}>
       <div className={styles.logo}>
         <Link href="/">
-          <h1 className={styles.textlogo}>GetIKEA</h1> 
+          <h1 className={styles.textlogo}>GetIKEA</h1>
         </Link>
       </div>
-      
+
       <div className={styles.user}>
         {user ? (
-          <>
-            <span onClick={() => setMenuOpen(!menuOpen)} className={styles.userName}>
-              Hello, {user.name}
-            </span>
-            {menuOpen && (
-              <div className={styles.menu}>
-                <Link href="/settings">Настройки</Link>
-                <button onClick={logout} className={styles.button}>Выйти</button>
-              </div>
-            )}
-          </>
+         
+         <Link className={styles.link} href="/login">Выйти</Link>
+         
         ) : (
           <Link className={styles.button} href="/login">Войти</Link>
         )}
@@ -37,3 +28,4 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
+

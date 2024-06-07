@@ -26,7 +26,7 @@ const LoginPage: React.FC = () => {
       if (token && user) {
         localStorage.setItem('token', token); // Сохраняем токен в localStorage
         setUser({ name: user.fullName, email: user.email });
-        router.push('/'); // Переход на главную страницу
+        router.push('/parcels'); // Переход на главную страницу
       } else {
         setError('Invalid email or password');
       }
@@ -97,5 +97,3 @@ const LoginPage: React.FC = () => {
 };
 
 export default LoginPage;
-
-

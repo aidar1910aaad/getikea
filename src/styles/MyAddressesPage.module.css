@@ -1,0 +1,44 @@
+.container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .content {
+    width: 100%;
+    padding: 20px;
+  }
+  
+  .addressBlock {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-top: 20px;
+  }
+  
+  .addressHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .express, .standard {
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+    cursor: pointer;
+  }
+  
+  .addressDetails {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .addressDetails div {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .addressDetails label {
+    font-weight: bold;
+  }
+  

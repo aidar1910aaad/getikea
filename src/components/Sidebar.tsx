@@ -1,24 +1,18 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Modal from 'react-modal';
-import { v4 as uuidv4 } from 'uuid';
+import { addParcels } from '../services/api';
+import { Item } from '../types';
 import styles from '../styles/Sidebar.module.css';
 import modalStyles from '../styles/Modal.module.css';
-import { Parcel, Item } from '../types';
 
-Modal.setAppElement('#__next'); // Set the app element for accessibility
+Modal.setAppElement('#__next');
 
-const Sidebar: React.FC<{ addParcel: (parcel: Parcel) => void }> = ({ addParcel }) => {
+const Sidebar: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [step, setStep] = useState(1);
-  const [parcelContent, setParcelContent] = useState('');
-  const [price, setPrice] = useState(0);
   const [trackingNumber, setTrackingNumber] = useState('');
-  const [address, setAddress] = useState('');
-  const [recipient, setRecipient] = useState('');
-  const [iin, setIin] = useState('');
-  const [fio, setFio] = useState('');
-  const [items, setItems] = useState<Item[]>([]);
+  const [items, setItems] = useState<Item[]>([{ productLink: '', quantity: 1, description: '' }]);
+  const [error, setError] = useState('');
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => {
@@ -26,63 +20,78 @@ const Sidebar: React.FC<{ addParcel: (parcel: Parcel) => void }> = ({ addParcel 
     resetForm();
   };
 
-  const handlePriceChange = (increment: number) => {
-    setPrice(prev => Math.max(0, prev + increment));
-  };
+  const handleAddParcel = async () => {
+    const token = localStorage.getItem('token');
 
-  const handleAddParcel = () => {
-    const newParcel: Parcel = {
-      id: Date.now(), // Use current timestamp as ID
-      trackingNumber,
-      userId: 1, // Replace with the actual user ID
-      status: 'Ожидаем',
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      items,
-      content: parcelContent,
-      address,
-      date: new Date().toLocaleDateString(),
-      code: uuidv4().slice(0, 8),
-      recipient,
-      iin,
-      fio,
-    };
-    addParcel(newParcel);
-    closeModal();
+    if (!token) {
+      setError('Пользователь не аутентифицирован');
+      return;
+    }
+
+    try {
+      console.log('Добавление посылки с данными:', { token, trackingNumber, items });
+      await addParcels(token, trackingNumber, items);
+      closeModal();
+    } catch (error) {
+      console.error('Ошибка при добавлении посылки:', error);
+      setError('Не удалось добавить посылку');
+    }
   };
 
   const resetForm = () => {
-    setParcelContent('');
-    setPrice(0);
     setTrackingNumber('');
-    setAddress('');
-    setRecipient('');
-    setIin('');
-    setFio('');
-    setItems([]);
-    setStep(1);
+    setItems([{ productLink: '', quantity: 0, description: '' }]);
+    setError('');
+  };
+
+  const handleItemChange = (index: number, field: keyof Item, value: string | number) => {
+    const newItems = [...items];
+    newItems[index] = {
+      ...newItems[index],
+      [field]: value,
+    };
+    setItems(newItems);
+  };
+
+  const addItem = () => {
+    setItems([...items, { productLink: '', quantity: 1, description: '' }]);
+  };
+
+  const removeItem = (index: number) => {
+    const newItems = items.filter((_, i) => i !== index);
+    setItems(newItems);
   };
 
   return (
     <div className={styles.sidebar}>
-      <button className={styles.addButton} onClick={openModal}>+ Добавить посылку</button>
+      <button className={styles.addButton} onClick={openModal}>Добавить посылку</button>
       <hr className={styles.separator} />
       <nav>
         <ul className={styles.navList}>
           <li className={styles.navItem}>
-            <Link href="/parcels" className={styles.navLink}>Посылки</Link>
+            <Link className={styles.navLink} href="/parcels" passHref>
+              Посылки
+            </Link>
           </li>
           <li className={styles.navItem}>
-            <Link href="/delivery-cost" className={styles.navLink}>Стоимость доставки</Link>
+            <Link className={styles.navLink} href="/delivery-cost" passHref>
+              Стоимость доставки
+            </Link>
           </li>
           <li className={styles.navItem}>
-            <Link href="/my-addresses" className={styles.navLink}>Мой адрес</Link>
+            <Link className={styles.navLink} href="/my-addresses" passHref>
+              Мой адрес
+            </Link>
           </li>
           <li className={styles.navItem}>
-            <Link href="/help" className={styles.navLink}>Помощь</Link>
+            <Link className={styles.navLink} href="/help" passHref>
+              Помощь
+            </Link>
           </li>
           <li className={styles.navItem}>
-            <Link href="/settings" className={styles.navLink}>Настройки</Link>
+            <Link className={styles.navLink} href="/settings" passHref>
+              Настройки
+            </Link>
           </li>
         </ul>
       </nav>
@@ -92,95 +101,61 @@ const Sidebar: React.FC<{ addParcel: (parcel: Parcel) => void }> = ({ addParcel 
         className={modalStyles.modal}
         overlayClassName={modalStyles.overlay}
       >
-        {step === 1 ? (
-          <div>
-            <h2>Новая посылка</h2>
-            <div className={modalStyles.inputGroup}>
-              <label>Содержимое посылки</label>
-              <input
-                type="text"
-                value={parcelContent}
-                onChange={(e) => setParcelContent(e.target.value)}
-                aria-label="Содержимое посылки"
-              />
-              <label>Цена ($)</label>
-              <div className={modalStyles.priceInput}>
+        <div className={modalStyles.modalContent}>
+          <h2>Новая посылка</h2>
+          {error && <p className={modalStyles.error}>{error}</p>}
+          <div className={modalStyles.inputGroup}>
+            <label>Трекинг номер</label>
+            <input
+              type="text"
+              value={trackingNumber}
+              onChange={(e) => setTrackingNumber(e.target.value)}
+              aria-label="Трекинг номер"
+              placeholder='122212111211221'
+            />
+          </div>
+          {items.map((item, index) => (
+            <div key={index} className={modalStyles.itemGroup}>
+              <h3>Товар {index + 1}</h3>
+              <button className={modalStyles.removeItemButton} onClick={() => removeItem(index)}>Удалить</button>
+              <div className={modalStyles.inputGroup}>
+                <label>Ссылка на товар</label>
+                <input
+                  type="text"
+                  value={item.productLink}
+                  onChange={(e) => handleItemChange(index, 'productLink', e.target.value)}
+                  aria-label="Ссылка на товар"
+                  placeholder='Ссылка на товар'
+                />
+              </div>
+              <div className={modalStyles.inputGroup}>
+                <label>Количество</label>
                 <input
                   type="number"
-                  value={price}
-                  readOnly
-                  aria-label="Цена"
+                  value={item.quantity}
+                  onChange={(e) => handleItemChange(index, 'quantity', +e.target.value)}
+                  aria-label="Количество"
+                  placeholder='Количество'
                 />
-                <div className={modalStyles.priceButtons}>
-                  <button onClick={() => handlePriceChange(0.1)} aria-label="Увеличить цену">▲</button>
-                  <button onClick={() => handlePriceChange(-0.1)} aria-label="Уменьшить цену">▼</button>
-                </div>
+              </div>
+              <div className={modalStyles.inputGroup}>
+                <label>Описание</label>
+                <input
+                  type="text"
+                  value={item.description}
+                  onChange={(e) => handleItemChange(index, 'description', e.target.value)}
+                  aria-label="Описание"
+                  placeholder='Описание'
+                />
               </div>
             </div>
-            <div className={modalStyles.inputGroup}>
-              <label>Трекинг номер</label>
-              <input
-                type="text"
-                value={trackingNumber}
-                onChange={(e) => setTrackingNumber(e.target.value)}
-                aria-label="Трекинг номер"
-              />
-            </div>
-            <p>
-              Укажите номер отслеживания вашей покупки. Обычно он присваивается в момент ее отправки из магазина. Это может занять до нескольких дней с момента совершения покупки.
-              <br />
-              Где найти трекинг номер?
-            </p>
-            <div className={modalStyles.buttons}>
-              <button onClick={closeModal}>Отмена</button>
-              <button onClick={() => setStep(2)}>Далее</button>
-            </div>
+          ))}
+          <button onClick={addItem} className={modalStyles.addItemButton}>Добавить товар</button>
+          <div className={modalStyles.buttons}>
+            <button onClick={closeModal}>Отмена</button>
+            <button onClick={handleAddParcel}>Добавить посылку</button>
           </div>
-        ) : (
-          <div>
-            <h2>Новая посылка</h2>
-            <div className={modalStyles.inputGroup}>
-              <label>Адрес</label>
-              <input
-                type="text"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                aria-label="Адрес"
-              />
-            </div>
-            <div className={modalStyles.inputGroup}>
-              <label>Получатель</label>
-              <input
-                type="text"
-                value={recipient}
-                onChange={(e) => setRecipient(e.target.value)}
-                aria-label="Получатель"
-              />
-            </div>
-            <div className={modalStyles.inputGroup}>
-              <label>ИИН</label>
-              <input
-                type="text"
-                value={iin}
-                onChange={(e) => setIin(e.target.value)}
-                aria-label="ИИН"
-              />
-            </div>
-            <div className={modalStyles.inputGroup}>
-              <label>ФИО</label>
-              <input
-                type="text"
-                value={fio}
-                onChange={(e) => setFio(e.target.value)}
-                aria-label="ФИО"
-              />
-            </div>
-            <div className={modalStyles.buttons}>
-              <button onClick={() => setStep(1)}>Назад</button>
-              <button onClick={handleAddParcel}>Добавить</button>
-            </div>
-          </div>
-        )}
+        </div>
       </Modal>
     </div>
   );

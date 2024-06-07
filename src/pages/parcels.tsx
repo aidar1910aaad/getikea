@@ -1,4 +1,3 @@
-// pages/parcels.tsx
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { Parcel } from '../types'; // Импорт типа Parcel
@@ -8,9 +7,12 @@ import modalStyles from '../styles/Modal.module.css'; // Импорт стиле
 
 Modal.setAppElement('#__next');
 
+const ITEMS_PER_PAGE = 4;
+
 const ParcelsPage: React.FC<{ parcels: Parcel[], setParcels: React.Dispatch<React.SetStateAction<Parcel[]>> }> = ({ parcels, setParcels }) => {
   const [selectedParcel, setSelectedParcel] = useState<Parcel | null>(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const fetchParcels = async () => {
@@ -43,22 +45,59 @@ const ParcelsPage: React.FC<{ parcels: Parcel[], setParcels: React.Dispatch<Reac
     setIsEditModalOpen(false);
   };
 
+  const totalPages = Math.ceil(parcels.length / ITEMS_PER_PAGE);
+
+  const handlePageChange = (newPage: number) => {
+    if (newPage > 0 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
+  };
+
+  const currentParcels = parcels.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
   return (
     <div className={styles.container}>
-      <h1>Посылки</h1>
-      <p>Управляйте вашими посылками здесь.</p>
+      <h1>Ваши посылки</h1>
       <div className={styles.parcelsList}>
-        {parcels.map((parcel) => (
+        {currentParcels.map((parcel) => (
           <div key={parcel.id} className={styles.parcel} onClick={() => handleEditClick(parcel)}>
-            <div className={styles.parcelHeader}>
-              <span className={styles.statusCircle}>{parcel.status}</span>
+            <div className={styles.parcelDetails}>
+              <div className={styles.parcelHeader}>
+                <span className={styles.statusCircle}>{parcel.status}</span>
+              </div>
+              <p className={styles.parcelId}><strong>Номер посылки:</strong> {parcel.id}</p>
             </div>
-            <div className={styles.parcelContent}>
-              <p><strong>Трекинг номер:</strong> {parcel.trackingNumber}</p>
-              <p><strong>Дата создания:</strong> {new Date(parcel.createdAt).toLocaleString()}</p>
-            </div>
+            {parcel.imageKey ? (
+              <img src={parcel.imageKey} alt={`Image for parcel ${parcel.id}`} className={styles.parcelImage} />
+            ) : (
+              <div className={styles.parcelImagePlaceholder}>
+                Тут должно быть фото
+              </div>
+            )}
           </div>
         ))}
+      </div>
+      <div className={styles.pagination}>
+        <button
+          className={styles.pageButton}
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Назад
+        </button>
+        <span className={styles.pageInfo}>
+          Страница {currentPage} из {totalPages}
+        </span>
+        <button
+          className={styles.pageButton}
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          Вперед
+        </button>
       </div>
       {selectedParcel && (
         <Modal
@@ -69,16 +108,22 @@ const ParcelsPage: React.FC<{ parcels: Parcel[], setParcels: React.Dispatch<Reac
         >
           <h2>Детали посылки</h2>
           <div className={modalStyles.modalContent}>
-            <p><strong>ID:</strong> {selectedParcel.id}</p>
-            <p><strong>Статус:</strong> {selectedParcel.status}</p>
-            <p><strong>Трекинг номер:</strong> {selectedParcel.trackingNumber}</p>
-            <p><strong>Дата создания:</strong> {new Date(selectedParcel.createdAt).toLocaleString()}</p>
-            <p><strong>Дата обновления:</strong> {new Date(selectedParcel.updatedAt).toLocaleString()}</p>
+            <div className={styles.flex}>
+              <div className={styles.descr}>
+                <p><strong>Номер посылки:</strong> {selectedParcel.id}</p>
+              </div>
+              <div className={styles.descr}>
+                <p><strong>Статус:</strong> {selectedParcel.status}</p>
+              </div>
+              <div className={styles.descr}>
+                <p><strong>Создано:</strong> {new Date(selectedParcel.createdAt).toLocaleString()}</p>
+              </div>
+            </div>
             <div className={styles.items}>
-              <h4>Товары:</h4>
+              <h3>Товары</h3>
               {selectedParcel.items.map((item) => (
                 <div key={item.id} className={styles.item}>
-                  <p><strong>ID товара:</strong> {item.id}</p>
+                  
                   <p><strong>Ссылка на продукт:</strong> <a href={item.productLink} target="_blank" rel="noopener noreferrer">{item.productLink}</a></p>
                   <p><strong>Количество:</strong> {item.quantity}</p>
                   <p><strong>Описание:</strong> {item.description}</p>
