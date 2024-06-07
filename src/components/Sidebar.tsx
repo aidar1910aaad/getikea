@@ -1,14 +1,19 @@
+// components/Sidebar.tsx
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Modal from 'react-modal';
 import { addParcels } from '../services/api';
-import { Item } from '../types';
+import { Item, Parcel } from '../types';
 import styles from '../styles/Sidebar.module.css';
 import modalStyles from '../styles/Modal.module.css';
 
 Modal.setAppElement('#__next');
 
-const Sidebar: React.FC = () => {
+interface SidebarProps {
+  addParcel: (parcel: Parcel) => void;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ addParcel }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [trackingNumber, setTrackingNumber] = useState('');
   const [items, setItems] = useState<Item[]>([{ productLink: '', quantity: 1, description: '' }]);
@@ -30,7 +35,8 @@ const Sidebar: React.FC = () => {
 
     try {
       console.log('Добавление посылки с данными:', { token, trackingNumber, items });
-      await addParcels(token, trackingNumber, items);
+      const newParcel = await addParcels(token, trackingNumber, items);
+      addParcel(newParcel);
       closeModal();
     } catch (error) {
       console.error('Ошибка при добавлении посылки:', error);
