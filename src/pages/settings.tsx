@@ -10,7 +10,7 @@ type ProfileType = {
   phoneNumber: string | null;
   iin: string | null;
   recipient: string | null;
-  newPassword: string | null;
+  password: string | null;
 };
 
 const SettingsPage: React.FC = () => {
@@ -22,7 +22,7 @@ const SettingsPage: React.FC = () => {
     phoneNumber: '',
     iin: '',
     recipient: '',
-    newPassword: '',
+    password: '',
   });
 
   const [initialProfile, setInitialProfile] = useState<ProfileType>({
@@ -33,7 +33,7 @@ const SettingsPage: React.FC = () => {
     phoneNumber: '',
     iin: '',
     recipient: '',
-    newPassword: '',
+    password: '',
   });
 
   const [error, setError] = useState<string | null>(null);
@@ -57,7 +57,7 @@ const SettingsPage: React.FC = () => {
           phoneNumber: profileData.phoneNumber || '',
           iin: profileData.iin || '',
           recipient: profileData.recipient || '',
-          newPassword: '',
+          password: profileData.password || '',
         };
         setProfile(profileToSet);
         setInitialProfile(profileToSet);
@@ -208,9 +208,9 @@ const SettingsPage: React.FC = () => {
                 <input
                   className={styles.fieldInput}
                   type="password"
-                  name="newPassword"
+                  name="password"
                   placeholder="Новый пароль"
-                  value={profile.newPassword || ''}
+                  value={profile.password || ''}
                   onChange={handleChange}
                 />
               </div>
