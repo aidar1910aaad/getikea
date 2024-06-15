@@ -18,9 +18,9 @@
   font-family: 'Nunito';
   font-weight: 300;
   height: 50px;
-  font-size: large;
+  font-size: 15px;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 8px;
 
   transition: 0.5s;
 }

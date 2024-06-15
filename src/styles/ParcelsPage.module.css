@@ -1,6 +1,7 @@
 /* styles/ParcelsPage.module.css */
 .container {
-  padding: 20px;
+  padding-left: 20px;
+  padding-right: 30px;
 }
 
 .parcelsList {
@@ -23,7 +24,6 @@
 
 .parcel:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .parcelHeader {
@@ -163,6 +163,7 @@
   align-items: center;
   margin-top: 20px;
   gap: 10px;
+  margin-bottom: 20px;
 }
 
 .pagination button {
@@ -172,6 +173,7 @@
   cursor: pointer;
   border-radius: 5px;
   transition: background-color 0.3s;
+  font-family: 'Nunito';
 }
 
 .pagination button:hover {

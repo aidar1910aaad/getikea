@@ -13,10 +13,10 @@
 
 .content {
   flex: 1;
-  padding: 2rem;
+  
   background-color: #fff; 
   border-radius: 0;
-  margin: 1rem;
+ 
 }
 
 @media (max-width: 768px) {

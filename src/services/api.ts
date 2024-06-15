@@ -78,9 +78,9 @@ export const getParcels = async (token: string) => {
 };
 
 
-export const addParcels = async (token: string, trackingNumber: string, items: Item[]) => {
+export const addParcels = async (token: string, items: Item[]) => {
   try {
-    const payload = { trackingNumber, items };
+    const payload = { items };
     console.log('Отправляемый payload:', payload);
 
     const response = await fetch('https://getikea.vercel.app/api/me/parcels', {
@@ -100,6 +100,53 @@ export const addParcels = async (token: string, trackingNumber: string, items: I
     return await response.json();
   } catch (error) {
     console.error('Ошибка при добавлении посылки:', error);
+    throw error;
+  }
+};
+
+export const getProfile = async (token: string) => {
+  try {
+    const res = await fetch(`${BASE_URL}/api/me/profile`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error('Failed to fetch profile');
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching profile:', error);
+    throw error;
+  }
+};
+export const updateProfile = async (token: string, profileData: any) => {
+  try {
+    console.log('Updating profile with data:', profileData);
+    const res = await fetch(`${BASE_URL}/api/me/profile`, {
+      method: 'PATCH',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(profileData),
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      console.error('Error data:', errorData);
+      throw new Error(errorData.message || 'Failed to update profile');
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error('Error updating profile:', error);
     throw error;
   }
 };

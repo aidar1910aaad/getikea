@@ -1,4 +1,3 @@
-// components/Sidebar.tsx
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Modal from 'react-modal';
@@ -15,7 +14,6 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ addParcel }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [trackingNumber, setTrackingNumber] = useState('');
   const [items, setItems] = useState<Item[]>([{ productLink: '', quantity: 1, description: '' }]);
   const [error, setError] = useState('');
 
@@ -34,8 +32,8 @@ const Sidebar: React.FC<SidebarProps> = ({ addParcel }) => {
     }
 
     try {
-      console.log('Добавление посылки с данными:', { token, trackingNumber, items });
-      const newParcel = await addParcels(token, trackingNumber, items);
+      console.log('Добавление посылки с данными:', { token, items });
+      const newParcel = await addParcels(token, items);
       addParcel(newParcel);
       closeModal();
     } catch (error) {
@@ -45,7 +43,6 @@ const Sidebar: React.FC<SidebarProps> = ({ addParcel }) => {
   };
 
   const resetForm = () => {
-    setTrackingNumber('');
     setItems([{ productLink: '', quantity: 0, description: '' }]);
     setError('');
   };
@@ -67,6 +64,8 @@ const Sidebar: React.FC<SidebarProps> = ({ addParcel }) => {
     const newItems = items.filter((_, i) => i !== index);
     setItems(newItems);
   };
+
+  const isAddItemDisabled = items.some(item => !item.productLink || item.quantity <= 0 || !item.description);
 
   return (
     <div className={styles.sidebar}>
@@ -107,19 +106,11 @@ const Sidebar: React.FC<SidebarProps> = ({ addParcel }) => {
         className={modalStyles.modal}
         overlayClassName={modalStyles.overlay}
       >
-        <div className={modalStyles.modalContent}>
+        <div className={modalStyles.modalHeader}>
           <h2>Новая посылка</h2>
           {error && <p className={modalStyles.error}>{error}</p>}
-          <div className={modalStyles.inputGroup}>
-            <label>Трекинг номер</label>
-            <input
-              type="text"
-              value={trackingNumber}
-              onChange={(e) => setTrackingNumber(e.target.value)}
-              aria-label="Трекинг номер"
-              placeholder='122212111211221'
-            />
-          </div>
+        </div>
+        <div className={modalStyles.modalContent}>
           {items.map((item, index) => (
             <div key={index} className={modalStyles.itemGroup}>
               <h3>Товар {index + 1}</h3>
@@ -156,11 +147,11 @@ const Sidebar: React.FC<SidebarProps> = ({ addParcel }) => {
               </div>
             </div>
           ))}
-          <button onClick={addItem} className={modalStyles.addItemButton}>Добавить товар</button>
-          <div className={modalStyles.buttons}>
-            <button onClick={closeModal}>Отмена</button>
-            <button onClick={handleAddParcel}>Добавить посылку</button>
-          </div>
+          <button onClick={addItem} className={modalStyles.addItemButton} disabled={isAddItemDisabled}>Добавить товар</button>
+        </div>
+        <div className={modalStyles.buttons}>
+          <button onClick={closeModal}>Отмена</button>
+          <button onClick={handleAddParcel}>Добавить посылку</button>
         </div>
       </Modal>
     </div>

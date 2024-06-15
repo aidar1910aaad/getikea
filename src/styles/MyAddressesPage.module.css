@@ -5,19 +5,21 @@
   
   .content {
     width: 100%;
-    padding: 20px;
+    padding-left: 20px;
   }
   
   .addressBlock {
     border: 1px solid #ddd;
     padding: 20px;
     margin-top: 20px;
+    border-radius: 15px;
   }
   
   .addressHeader {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+    border-radius: 8px;
   }
   
   .express, .standard {
@@ -25,6 +27,7 @@
     border: 1px solid #ddd;
     background-color: #f8f8f8;
     cursor: pointer;
+    border-radius: 8px;
   }
   
   .addressDetails {

@@ -29,6 +29,10 @@
   
 }
 
+.link:hover {
+  border-bottom: 1px solid #FDC503;
+}
+
 .search {
   flex: 1;
   margin: 0 2rem;

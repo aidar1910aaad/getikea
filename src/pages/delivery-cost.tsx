@@ -68,7 +68,7 @@ const DeliveryCostPage: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.header}>Стоимость доставки</h1>
+      <h1 >Стоимость доставки</h1>
       <p className={styles.description}>
         В списке можно выбрать популярные товары и узнать примерную стоимость их доставки.
       </p>
@@ -114,43 +114,7 @@ const DeliveryCostPage: React.FC = () => {
         </div>
       </div>
 
-      <div className={styles.courierCostContainer}>
-        <p className={styles.courierCostLabel}>Стоимость доставки курьером</p>
-        <div className={styles.courierOptions}>
-          <button className={`${styles.courierOption} ${!isExpress ? styles.activeOption : ''}`} onClick={() => setIsExpress(false)}>
-            Стандарт
-          </button>
-          <button className={`${styles.courierOption} ${isExpress ? styles.activeOption : ''}`} onClick={() => setIsExpress(true)}>
-            Экспресс
-          </button>
-        </div>
-        <div className={styles.fromTo}>
-          <select className={styles.fromToItem} value={fromCity} onChange={(e) => setFromCity(e.target.value)}>
-            {cities.map(city => (
-              <option key={city} value={city}>{city}</option>
-            ))}
-          </select>
-          <select className={styles.fromToItem} value={toCity} onChange={(e) => setToCity(e.target.value)}>
-            {cities.map(city => (
-              <option key={city} value={city}>{city}</option>
-            ))}
-          </select>
-        </div>
-        <div className={styles.fromTo}>
-          <input
-            type="number"
-            className={styles.fromToItem}
-            value={courierWeight}
-            onChange={(e) => setCourierWeight(parseFloat(e.target.value))}
-            placeholder="Вес посылки, кг"
-            step={0.1}
-          />
-        </div>
-        <div className={styles.calculateContainer}>
-          <button onClick={calculateTotalCost} className={styles.calculateButton}>Рассчитать стоимость</button>
-          <p className={styles.totalCost}>Общая стоимость доставки: {totalCost.toFixed(2)} тг</p>
-        </div>
-      </div>
+      
     </div>
   );
 };

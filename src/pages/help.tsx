@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../styles/HelpPage.module.css';
 
 const FAQItem: React.FC<{ 
@@ -13,7 +13,7 @@ const FAQItem: React.FC<{
     </div>
     <div className={`${styles.answerWrapper} ${isOpen ? styles.open : ''}`}>
       <div className={styles.answer}>
-        {isOpen && <div className={styles.verticalLine}></div>}
+        <div className={styles.verticalLine}></div>
         <div className={styles.answerText}>{answer}</div>
       </div>
     </div>
@@ -22,6 +22,7 @@ const FAQItem: React.FC<{
 
 const HelpPage: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [closingIndex, setClosingIndex] = useState<number | null>(null);
 
   const faqData = [
     { question: "Где покупать в Америке?", answer: "Рекомендуем покупать только в проверенных интернет-магазинах, мы следим за отзывами и рейтингами всех магазинов." },
@@ -32,15 +33,29 @@ const HelpPage: React.FC = () => {
     { question: "Будет ли комиссия банка при оплате?", answer: "Комиссия банка зависит от условий вашего банка. Мы рекомендуем уточнить это у вашего банка перед совершением платежа." }
   ];
 
+  useEffect(() => {
+    if (closingIndex !== null) {
+      const timer = setTimeout(() => {
+        setClosingIndex(null);
+      }, 10000); // Длительность анимации закрытия должна совпадать со значением в CSS
+
+      return () => clearTimeout(timer);
+    }
+  }, [closingIndex]);
+
   const handleClick = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
+    if (openIndex === index) {
+      setOpenIndex(null);
+    } else {
+      setClosingIndex(openIndex);
+      setOpenIndex(index);
+    }
   };
 
   return (
     <div className={styles.container}>
       <h1>Помощь</h1>
-      <h2>Как работает сервис?</h2>
-      <p>Shipper позволяет получать товары, заказанные в интернет-магазинах США. Вам предоставляется личный адрес в Америке, на который вы можете оформлять доставку, а Shipper пришлет вам все ваши покупки.</p>
+      <p className={styles.greytext}>Как покупать с помощью сервиса Shipper. Если вы новичок шоппинга, давайте начнем с азов. Как купить в магазине, оформить доставку и отправить покупки.</p>
       <div className={styles.faqSection}>
         {faqData.map((faq, index) => (
           <FAQItem

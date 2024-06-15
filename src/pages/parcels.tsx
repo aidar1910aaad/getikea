@@ -58,6 +58,16 @@ const ParcelsPage: React.FC<{ parcels: Parcel[], setParcels: React.Dispatch<Reac
     currentPage * ITEMS_PER_PAGE
   );
 
+  const formatDate = (dateString: string) => {
+    const options: Intl.DateTimeFormatOptions = {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    };
+    const date = new Date(dateString);
+    return new Intl.DateTimeFormat('ru-RU', options).format(date).replace(/\.$/, '');
+  };
+
   return (
     <div className={styles.container}>
       <h1>Ваши посылки</h1>
@@ -116,7 +126,7 @@ const ParcelsPage: React.FC<{ parcels: Parcel[], setParcels: React.Dispatch<Reac
                 <p><strong>Статус:</strong> {selectedParcel.status}</p>
               </div>
               <div className={styles.descr}>
-                <p><strong>Создано:</strong> {new Date(selectedParcel.createdAt).toLocaleString()}</p>
+                <p><strong>Создано:</strong> {formatDate(selectedParcel.createdAt)}</p>
               </div>
             </div>
             <div className={styles.items}>

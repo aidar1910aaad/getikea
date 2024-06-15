@@ -3,7 +3,7 @@ import styles from '../styles/RightPanel.module.css';
 
 const RightPanel: React.FC = () => (
   <div className={styles.rightPanel}>
-    <h1>Обратите внимание</h1>
+    <h2>Обратите внимание</h2>
     <div className={styles.block}>
       <h3>Экономьте на покупках</h3>
       <p>На нашем складе в штате Delaware (DE) нет налогов, вы экономите до 9% от стоимости заказа.</p>

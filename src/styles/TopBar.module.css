@@ -31,7 +31,7 @@
   display: flex;
   gap: 1rem;
   white-space: nowrap; 
-  padding-right: 50px;/* Предотвращает перенос ссылок */
+  padding-right: 50px;
 }
 
 .link {
@@ -52,7 +52,7 @@
   border-bottom: 1px solid #FDC503;
 }
 
-/* Адаптивные стили */
+
 @media (max-width: 768px) {
   .topBar {
     flex-direction: column;
