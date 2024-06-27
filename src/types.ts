@@ -1,27 +1,34 @@
 export interface Item {
-  id?: number;
-  parcelId?: number;
+  id: number;
+  parcelId: number;
   productLink: string;
   quantity: number;
   description: string;
-  imageKey?: string;
+  imageKey: string | null;
+}
+
+export interface User {
+  id: number;
+  email: string;
+  fullName: string | null;
+  address: string | null;
+  IDCardNumber: string | null;
+  phoneNumber: string | null;
+  iin: string | null;
+  recipient: string | null;
+  createdAt: string;
+  updatedAt: string;
+  role: string;
 }
 
 export interface Parcel {
-  imageKey: any;
   id: number;
-  trackingNumber: string;
   userId: number;
   status: string;
+  imageKey: string | null;
   createdAt: string;
   updatedAt: string;
   items: Item[];
-  content?: string;
-  address?: string;
-  date?: string;
-  code?: string;
-  recipient?: string;
-  iin?: string;
-  fio?: string;
-  parcelKey: string;
+  user: User;
+  [key: string]: any;
 }

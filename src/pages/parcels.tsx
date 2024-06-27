@@ -4,6 +4,7 @@ import { Parcel } from '../types'; // Импорт типа Parcel
 import { getParcels } from '../services/api'; // Импорт функции для получения посылок
 import styles from '../styles/ParcelsPage.module.css';
 import modalStyles from '../styles/Modal.module.css'; // Импорт стилей модального окна
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 Modal.setAppElement('#__next');
 
@@ -69,6 +70,7 @@ const ParcelsPage: React.FC<{ parcels: Parcel[], setParcels: React.Dispatch<Reac
   };
 
   return (
+    <ProtectedRoute requiredRole='user'>
     <div className={styles.container}>
       <h1>Ваши посылки</h1>
       <div className={styles.parcelsList}>
@@ -147,6 +149,7 @@ const ParcelsPage: React.FC<{ parcels: Parcel[], setParcels: React.Dispatch<Reac
         </Modal>
       )}
     </div>
+    </ProtectedRoute>
   );
 };
 

@@ -1,3 +1,4 @@
+import ProtectedRoute from '@/components/ProtectedRoute';
 import React, { useState, useEffect } from 'react';
 import { getProfile, updateProfile } from '../services/api';
 import styles from '../styles/SettingsPage.module.css';
@@ -122,6 +123,7 @@ const SettingsPage: React.FC = () => {
   }
 
   return (
+    <ProtectedRoute requiredRole='user'>
     <div className={styles.container}>
       <h1>Настройки аккаунта</h1>
       {success && <div className={styles.successMessage}>Данные успешно сохранены!</div>}
@@ -220,6 +222,7 @@ const SettingsPage: React.FC = () => {
         </form>
       </div>
     </div>
+    </ProtectedRoute>
   );
 };
 

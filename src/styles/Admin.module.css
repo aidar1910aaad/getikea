@@ -1,0 +1,29 @@
+.container {
+    padding: 20px;
+  }
+  
+  .nav,
+  .subnav {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .link {
+    padding: 10px 15px;
+    background-color: #0070f3;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .link:hover {
+    background-color: #005bb5;
+  }
+  
+  .content {
+    padding: 20px;
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+  }
+  

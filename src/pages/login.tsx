@@ -1,11 +1,10 @@
-// pages/auth/login.tsx
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { useUser } from '../components/UserContext'; // корректный импорт useUser
+import { useUser } from '../components/UserContext';
 import TopBar from '../components/TopBar';
 import Footer from '../components/Footer';
-import { login } from '../services/api'; // корректный импорт login
+import { login } from '../services/api';
 import styles from '../styles/Auth.module.css';
 
 const LoginPage: React.FC = () => {
@@ -18,25 +17,27 @@ const LoginPage: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(''); // Clear previous error
+    setError('');
     try {
       const response = await login(email, password);
-      console.log('Response:', response); // Log response for debugging
       const { user, token } = response;
       if (token && user) {
-        localStorage.setItem('token', token); // Сохраняем токен в localStorage
-        setUser({ name: user.fullName, email: user.email });
-        router.push('/parcels'); // Переход на главную страницу
+        const tokenExpiry = Date.now() + 60 * 60 * 1000; // Устанавливаем срок действия токена на 1 час
+        localStorage.setItem('token', token);
+        localStorage.setItem('tokenExpiry', tokenExpiry.toString());
+        setUser({ name: user.fullName || 'No Name', email: user.email, role: user.role }, token, tokenExpiry);
+
+        if (user.role === 'admin') {
+          router.push('/admin/admin');
+        } else {
+          router.push('/parcels');
+        }
       } else {
         setError('Invalid email or password');
       }
     } catch (err) {
       console.error('Failed to login:', err);
-      if (err instanceof Error) {
-        setError(err.message || 'Failed to login. Please try again.');
-      } else {
-        setError('An unknown error occurred. Please try again.');
-      }
+      setError('Failed to login. Please try again.');
     }
   };
 

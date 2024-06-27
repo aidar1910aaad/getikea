@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useUser } from './UserContext';
 import styles from '../styles/Navbar.module.css';
 
 const Navbar: React.FC = () => {
   const { user, logout } = useUser();
+  const router = useRouter();
+
+  const handleLogout = () => {
+    logout();
+    router.push('/login'); // Перенаправление на страницу логина после выхода
+  };
 
   return (
     <nav className={styles.navbar}>
@@ -16,11 +23,13 @@ const Navbar: React.FC = () => {
 
       <div className={styles.user}>
         {user ? (
-         
-         <Link className={styles.link} href="/login">Выйти</Link>
-         
+          <Link href="/login">
+            <span className={styles.link} onClick={handleLogout}>Выйти</span>
+          </Link>
         ) : (
-          <Link className={styles.button} href="/login">Войти</Link>
+          <Link href="/login">
+            <span className={styles.button}>Войти</span>
+          </Link>
         )}
       </div>
     </nav>
@@ -28,4 +37,5 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
+
 

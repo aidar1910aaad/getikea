@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/DeliveryCostPage.module.css';
 import { FaUsb, FaBook, FaLaptop, FaShoppingBag, FaMobileAlt, FaTabletAlt, FaTv, FaCamera, FaBicycle } from 'react-icons/fa';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 const cities = ["Алматы", "Нур-Султан", "Шымкент", "Караганда", "Актобе", "Тараз", "Павлодар", "Усть-Каменогорск", "Семей", "Актау"];
 
@@ -67,6 +68,7 @@ const DeliveryCostPage: React.FC = () => {
   }, []);
 
   return (
+    <ProtectedRoute requiredRole='user'>
     <div className={styles.container}>
       <h1 >Стоимость доставки</h1>
       <p className={styles.description}>
@@ -116,6 +118,7 @@ const DeliveryCostPage: React.FC = () => {
 
       
     </div>
+    </ProtectedRoute>
   );
 };
 

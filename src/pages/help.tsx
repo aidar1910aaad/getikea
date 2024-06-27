@@ -1,3 +1,4 @@
+import ProtectedRoute from '../components/ProtectedRoute';
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/HelpPage.module.css';
 
@@ -53,6 +54,7 @@ const HelpPage: React.FC = () => {
   };
 
   return (
+    <ProtectedRoute requiredRole='user'>
     <div className={styles.container}>
       <h1>Помощь</h1>
       <p className={styles.greytext}>Как покупать с помощью сервиса Shipper. Если вы новичок шоппинга, давайте начнем с азов. Как купить в магазине, оформить доставку и отправить покупки.</p>
@@ -68,6 +70,7 @@ const HelpPage: React.FC = () => {
         ))}
       </div>
     </div>
+    </ProtectedRoute>
   );
 };
 

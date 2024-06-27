@@ -1,7 +1,9 @@
 import React from 'react';
 import styles from '../styles/MyAddressesPage.module.css';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 const MyAddressesPage: React.FC = () => (
+  <ProtectedRoute>
   <div className={styles.container}>
     <div className={styles.content}>
       <h1>Ваш персональный адрес в Америке</h1>
@@ -52,6 +54,7 @@ const MyAddressesPage: React.FC = () => (
       </div>
     </div>
   </div>
+  </ProtectedRoute>
 );
 
 export default MyAddressesPage;

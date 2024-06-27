@@ -1,0 +1,113 @@
+/* styles/ViewAllParcels.module.css */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .sortMenu {
+    margin-bottom: 20px;
+  }
+  
+  .dropdown {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .parcelList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+  }
+  
+  .parcelBlock {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+    background-color: #f9f9f9;
+  }
+  
+  .parcelBlock:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .parcelInfo {
+    flex: 1;
+    text-align: left;
+  }
+  
+  .deleteButton {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .deleteButton:hover {
+    background-color: darkred;
+  }
+  
+  .modal {
+    background: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 200px;
+  }
+  
+  .updateButton, .closeButton {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .updateButton {
+    background-color: green;
+    color: white;
+  }
+  
+  .updateButton:hover {
+    background-color: darkgreen;
+  }
+  
+  .closeButton {
+    background-color: grey;
+    color: white;
+  }
+  
+  .closeButton:hover {
+    background-color: darkgrey;
+  }
+  
+  .imageContainer {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .parcelImage {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
