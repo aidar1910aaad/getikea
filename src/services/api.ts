@@ -129,7 +129,7 @@ export const updateProfile = async (token: string, profileData: any) => {
   try {
     console.log('Updating profile with data:', profileData);
     const res = await fetch(`${BASE_URL}/api/me/profile`, {
-      method: 'PATCH',
+      method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',

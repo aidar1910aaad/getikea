@@ -140,7 +140,7 @@ export const createUser = async (userData: any, token: string) => {
 export const updateUser = async (id: number, userData: any, token: string) => {
   const url = `${BASE_URL}/api/admin/users/${id}`;
   return fetchData(url, {
-    method: 'PATCH',
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
