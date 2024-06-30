@@ -1,3 +1,5 @@
+import { Item } from "@/types";
+
 const BASE_URL = 'https://getikea.vercel.app';
 
 const fetchData = async (url: string, options: RequestInit) => {
@@ -19,8 +21,9 @@ const fetchData = async (url: string, options: RequestInit) => {
 
 // Parcels API
 
-export const getAllParcels = async (token: string) => {
-  const url = `${BASE_URL}/api/admin/parcels`;
+export const getAllParcels = async (token: string, page: number = 1, limit: number = 20) => {
+  const url = `${BASE_URL}/api/admin/parcels?page=${page}&limit=${limit}`;
+  console.log('Fetching parcels from URL:', url); // Логирование URL для проверки
   return fetchData(url, {
     method: 'GET',
     headers: {
@@ -41,6 +44,7 @@ export const getParcel = async (id: number, token: string) => {
 
 export const addParcel = async (parcelData: any, token: string) => {
   const url = `${BASE_URL}/api/admin/parcels`;
+  console.log('Sending parcel data:', parcelData); // Логирование данных, которые отправляем
   return fetchData(url, {
     method: 'POST',
     headers: {
@@ -52,7 +56,7 @@ export const addParcel = async (parcelData: any, token: string) => {
 };
 
 export const patchParcelStatus = async (id: number, status: string, token: string) => {
-  const url = `${BASE_URL}/api/admin/parcels/${id}/status`;
+  const url = `${BASE_URL}/api/admin/parcels/${id}`;
   return fetchData(url, {
     method: 'PATCH',
     headers: {
@@ -64,7 +68,7 @@ export const patchParcelStatus = async (id: number, status: string, token: strin
 };
 
 export const patchParcelItems = async (id: number, items: Item[], token: string) => {
-  const url = `${BASE_URL}/api/admin/parcels/${id}/items`;
+  const url = `${BASE_URL}/api/admin/parcels/${id}`;
   return fetchData(url, {
     method: 'PATCH',
     headers: {
@@ -76,7 +80,7 @@ export const patchParcelItems = async (id: number, items: Item[], token: string)
 };
 
 export const patchParcelImageKey = async (id: number, imageKey: string, token: string) => {
-  const url = `${BASE_URL}/api/admin/parcels/${id}/imageKey`;
+  const url = `${BASE_URL}/api/admin/parcels/${id}`;
   return fetchData(url, {
     method: 'PATCH',
     headers: {
@@ -119,6 +123,7 @@ export const getAllUsers = async (token: string) => {
   });
 };
 
+
 export const createUser = async (userData: any, token: string) => {
   const url = `${BASE_URL}/api/admin/users`;
   return fetchData(url, {
@@ -130,6 +135,7 @@ export const createUser = async (userData: any, token: string) => {
     body: JSON.stringify(userData)
   });
 };
+
 
 export const updateUser = async (id: number, userData: any, token: string) => {
   const url = `${BASE_URL}/api/admin/users/${id}`;

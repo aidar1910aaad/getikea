@@ -16,7 +16,7 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ addParcel }) => {
   const { user } = useUser(); // Получаем информацию о текущем пользователе
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [items, setItems] = useState<Item[]>([{ productLink: '', quantity: 1, description: '' }]);
+  const [items, setItems] = useState<Item[]>([{ id: 0, parcelId: 0, productLink: '', quantity: 1, description: '', imageKey: '' }]);
   const [error, setError] = useState('');
 
   const openModal = () => setIsModalOpen(true);
@@ -45,7 +45,7 @@ const Sidebar: React.FC<SidebarProps> = ({ addParcel }) => {
   };
 
   const resetForm = () => {
-    setItems([{ productLink: '', quantity: 0, description: '' }]);
+    setItems([{ id: 0, parcelId: 0, productLink: '', quantity: 1, description: '', imageKey: '' }]);
     setError('');
   };
 
@@ -59,7 +59,7 @@ const Sidebar: React.FC<SidebarProps> = ({ addParcel }) => {
   };
 
   const addItem = () => {
-    setItems([...items, { productLink: '', quantity: 1, description: '' }]);
+    setItems([...items, { id: 0, parcelId: 0, productLink: '', quantity: 1, description: '', imageKey: '' }]);
   };
 
   const removeItem = (index: number) => {

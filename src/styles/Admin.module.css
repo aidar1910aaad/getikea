@@ -13,8 +13,10 @@
     padding: 10px 15px;
     background-color: #0070f3;
     color: white;
-    text-decoration: none;
+    text-decoration: none; /* This will ensure no underline */
     border-radius: 5px;
+    cursor: pointer; /* This will make the span look like a clickable button */
+    display: inline-block; /* This will make the span respect the padding properly */
   }
   
   .link:hover {
