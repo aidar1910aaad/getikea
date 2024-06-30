@@ -58,7 +58,7 @@ export const addParcel = async (parcelData: any, token: string) => {
 export const patchParcelStatus = async (id: number, status: string, token: string) => {
   const url = `${BASE_URL}/api/admin/parcels/${id}`;
   return fetchData(url, {
-    method: 'PATCH',
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
@@ -70,7 +70,7 @@ export const patchParcelStatus = async (id: number, status: string, token: strin
 export const patchParcelItems = async (id: number, items: Item[], token: string) => {
   const url = `${BASE_URL}/api/admin/parcels/${id}`;
   return fetchData(url, {
-    method: 'PATCH',
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
@@ -82,7 +82,7 @@ export const patchParcelItems = async (id: number, items: Item[], token: string)
 export const patchParcelImageKey = async (id: number, imageKey: string, token: string) => {
   const url = `${BASE_URL}/api/admin/parcels/${id}`;
   return fetchData(url, {
-    method: 'PATCH',
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
