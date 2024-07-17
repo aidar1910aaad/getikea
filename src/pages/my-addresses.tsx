@@ -3,7 +3,7 @@ import styles from '../styles/MyAddressesPage.module.css';
 import ProtectedRoute from '@/components/ProtectedRoute';
 
 const MyAddressesPage: React.FC = () => (
-  <ProtectedRoute>
+  <ProtectedRoute requiredRole='user'>
   <div className={styles.container}>
     <div className={styles.content}>
       <h1>Ваш персональный адрес в Америке</h1>
@@ -11,7 +11,6 @@ const MyAddressesPage: React.FC = () => (
       <div className={styles.addressBlock}>
         <div className={styles.addressHeader}>
           <button className={styles.express}>Express (DE) NEW</button>
-          <button className={styles.standard}>Standard (DE)</button>
         </div>
         <div className={styles.addressDetails}>
           <div>

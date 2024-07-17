@@ -22,12 +22,42 @@
     border-radius: 8px;
   }
   
-  .express, .standard {
-    padding: 10px;
-    border: 1px solid #ddd;
-    background-color: #f8f8f8;
+
+  .addButton, .addBalanceButton {
+    background-color: #FDC503;
+    color: #003F88;
+    border: none;
+    margin-top: 10px;
+    padding: 0.5rem 1rem;
+    font-family: 'Nunito';
+    font-weight: 300;
+    height: 50px;
+    font-size: 15px;
     cursor: pointer;
     border-radius: 8px;
+  
+    transition: 0.5s;
+  }
+  
+  .addButton:hover{
+    background-color: #ffd94f;
+  }
+  
+
+  .express, .standard {
+    padding: 10px;
+    background-color: #FDC503;
+    color: #003F88;
+    cursor: pointer;
+    font-family: 'Nunito';
+    font-weight: 300;
+    transition: 0.5s;
+    border: none;
+    border-radius: 8px;
+  }
+
+  .express:hover{
+    background-color: #ffd94f;
   }
   
   .addressDetails {

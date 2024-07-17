@@ -5,6 +5,8 @@ import { getParcels } from '../services/api'; // Импорт функции д�
 import styles from '../styles/ParcelsPage.module.css';
 import modalStyles from '../styles/Modal.module.css'; // Импорт стилей модального окна
 import ProtectedRoute from '@/components/ProtectedRoute';
+import { FaBoxOpen } from "react-icons/fa";
+
 
 Modal.setAppElement('#__next');
 
@@ -71,86 +73,94 @@ const ParcelsPage: React.FC<{ parcels: Parcel[], setParcels: React.Dispatch<Reac
 
   return (
     <ProtectedRoute requiredRole='user'>
-    <div className={styles.container}>
-      <h1>Ваши посылки</h1>
-      <div className={styles.parcelsList}>
-        {currentParcels.map((parcel) => (
-          <div key={parcel.id} className={styles.parcel} onClick={() => handleEditClick(parcel)}>
-            <div className={styles.parcelDetails}>
-              <div className={styles.parcelHeader}>
-                <span className={styles.statusCircle}>{parcel.status}</span>
-              </div>
-              <p className={styles.parcelId}><strong>Номер посылки:</strong> {parcel.id}</p>
-            </div>
-            {parcel.imageKey ? (
-              <img src={parcel.imageKey} alt={`Image for parcel ${parcel.id}`} className={styles.parcelImage} />
-            ) : (
-              <div className={styles.parcelImagePlaceholder}>
-                Тут должно быть фото
-              </div>
-            )}
+      <div className={styles.container}>
+        <h1>Ваши посылки</h1>
+        {parcels.length === 0 ? (
+          <div className={styles.emptyContainer}>
+            <FaBoxOpen className={styles.emptyIcon} />
+            <p className={styles.grtext} >У Вас нет посылок</p>
           </div>
-        ))}
-      </div>
-      <div className={styles.pagination}>
-        <button
-          className={styles.pageButton}
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          Назад
-        </button>
-        <span className={styles.pageInfo}>
-          Страница {currentPage} из {totalPages}
-        </span>
-        <button
-          className={styles.pageButton}
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        >
-          Вперед
-        </button>
-      </div>
-      {selectedParcel && (
-        <Modal
-          isOpen={isEditModalOpen}
-          onRequestClose={() => setIsEditModalOpen(false)}
-          className={modalStyles.modal}
-          overlayClassName={modalStyles.overlay}
-        >
-          <h2>Детали посылки</h2>
-          <div className={modalStyles.modalContent}>
-            <div className={styles.flex}>
-              <div className={styles.descr}>
-                <p><strong>Номер посылки:</strong> {selectedParcel.id}</p>
-              </div>
-              <div className={styles.descr}>
-                <p><strong>Статус:</strong> {selectedParcel.status}</p>
-              </div>
-              <div className={styles.descr}>
-                <p><strong>Создано:</strong> {formatDate(selectedParcel.createdAt)}</p>
-              </div>
-            </div>
-            <div className={styles.items}>
-              <h3>Товары</h3>
-              {selectedParcel.items.map((item) => (
-                <div key={item.id} className={styles.item}>
-                  
-                  <p><strong>Ссылка на продукт:</strong> <a href={item.productLink} target="_blank" rel="noopener noreferrer">{item.productLink}</a></p>
-                  <p><strong>Количество:</strong> {item.quantity}</p>
-                  <p><strong>Описание:</strong> {item.description}</p>
+        ) : (
+          <>
+            <div className={styles.parcelsList}>
+              {currentParcels.map((parcel) => (
+                <div key={parcel.id} className={styles.parcel} onClick={() => handleEditClick(parcel)}>
+                  <div className={styles.parcelDetails}>
+                    <div className={styles.parcelHeader}>
+                      <span className={styles.statusCircle}>{parcel.status}</span>
+                    </div>
+                    <p className={styles.parcelId}><strong>Номер посылки:</strong> {parcel.id}</p>
+                  </div>
+                  {parcel.imageKey ? (
+                    <img src={parcel.imageKey} alt={`Image for parcel ${parcel.id}`} className={styles.parcelImage} />
+                  ) : (
+                    <div className={styles.parcelImagePlaceholder}>
+                      Тут должно быть фото
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
-          </div>
-          <div className={modalStyles.buttons}>
-            <button onClick={() => setIsEditModalOpen(false)}>Закрыть</button>
-          </div>
-        </Modal>
-      )}
-    </div>
-    </ProtectedRoute>
-  );
-};
-
-export default ParcelsPage;
+            <div className={styles.pagination}>
+              <button
+                className={styles.pageButton}
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                Назад
+              </button>
+              <span className={styles.pageInfo}>
+                Страница {currentPage} из {totalPages}
+              </span>
+              <button
+                className={styles.pageButton}
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+              >
+                Вперед
+              </button>
+            </div>
+            {selectedParcel && (
+              <Modal
+                isOpen={isEditModalOpen}
+                onRequestClose={() => setIsEditModalOpen(false)}
+                className={modalStyles.modal}
+                overlayClassName={modalStyles.overlay}
+              >
+                <h2>Детали посылки</h2>
+                <div className={modalStyles.modalContent}>
+                  <div className={styles.flex}>
+                    <div className={styles.descr}>
+                      <p><strong>Номер посылки:</strong> {selectedParcel.id}</p>
+                    </div>
+                    <div className={styles.descr}>
+                      <p><strong>Статус:</strong> {selectedParcel.status}</p>
+                    </div>
+                    <div className={styles.descr}>
+                      <p><strong>Создано:</strong> {formatDate(selectedParcel.createdAt)}</p>
+                    </div>
+                  </div>
+                  <div className={styles.items}>
+                    <h3>Товары</h3>
+                    {selectedParcel.items.map((item) => (
+                      <div key={item.id} className={styles.item}>
+                        <p><strong>Ссылка на продукт:</strong> <a href={item.productLink} target="_blank" rel="noopener noreferrer">{item.productLink}</a></p>
+                        <p><strong>Количество:</strong> {item.quantity}</p>
+                        <p><strong>Описание:</strong> {item.description}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className={modalStyles.buttons}>
+                  <button onClick={() => setIsEditModalOpen(false)}>Закрыть</button>
+                </div>
+              </Modal>
+            )}
+          </>
+        )}  
+        </div>
+        </ProtectedRoute>
+      );
+    };
+    
+    export default ParcelsPage;
