@@ -35,7 +35,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         {user && <RightPanel />}
       </div>
       <a
-        href="https://wa.me/YOUR_WHATSAPP_NUMBER"
+        href="https://wa.me/+77772513021"
         target="_blank"
         rel="noopener noreferrer"
         className={styles.whatsappButton}

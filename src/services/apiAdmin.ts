@@ -1,6 +1,6 @@
 import { Item } from "@/types";
 
-const BASE_URL = 'https://getikea.vercel.app';
+const BASE_URL = "https://smartshipping.vercel.app";
 
 const fetchData = async (url: string, options: RequestInit) => {
   try {
@@ -8,96 +8,112 @@ const fetchData = async (url: string, options: RequestInit) => {
 
     if (!res.ok) {
       const errorData = await res.json();
-      throw new Error(errorData.message || 'Request failed');
+      throw new Error(errorData.message || "Request failed");
     }
 
     const response = await res.json();
     return response;
   } catch (error) {
-    console.error('Error during API request:', error);
+    console.error("Error during API request:", error);
     throw error;
   }
 };
 
 // Parcels API
 
-export const getAllParcels = async (token: string, page: number = 1, limit: number = 20) => {
+export const getAllParcels = async (
+  token: string,
+  page: number = 1,
+  limit: number = 20
+) => {
   const url = `${BASE_URL}/api/admin/parcels?page=${page}&limit=${limit}`;
-  console.log('Fetching parcels from URL:', url); // Логирование URL для проверки
+  console.log("Fetching parcels from URL:", url); // Логирование URL для проверки
   return fetchData(url, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Authorization': `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   });
 };
 
 export const getParcel = async (id: number, token: string) => {
   const url = `${BASE_URL}/api/admin/parcels/${id}`;
   return fetchData(url, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Authorization': `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   });
 };
 
 export const addParcel = async (parcelData: any, token: string) => {
   const url = `${BASE_URL}/api/admin/parcels`;
-  console.log('Sending parcel data:', parcelData); // Логирование данных, которые отправляем
+  console.log("Sending parcel data:", parcelData); // Логирование данных, которые отправляем
   return fetchData(url, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(parcelData)
+    body: JSON.stringify(parcelData),
   });
 };
 
-export const patchParcelStatus = async (id: number, status: string, token: string) => {
+export const patchParcelStatus = async (
+  id: number,
+  status: string,
+  token: string
+) => {
   const url = `${BASE_URL}/api/admin/parcels/${id}`;
   return fetchData(url, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ status })
+    body: JSON.stringify({ status }),
   });
 };
 
-export const patchParcelItems = async (id: number, items: Item[], token: string) => {
+export const patchParcelItems = async (
+  id: number,
+  items: Item[],
+  token: string
+) => {
   const url = `${BASE_URL}/api/admin/parcels/${id}`;
   return fetchData(url, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ items })
+    body: JSON.stringify({ items }),
   });
 };
 
-export const patchParcelImageKey = async (id: number, imageKey: string, token: string) => {
+export const patchParcelImageKey = async (
+  id: number,
+  imageKey: string,
+  token: string
+) => {
   const url = `${BASE_URL}/api/admin/parcels/${id}`;
   return fetchData(url, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ imageKey })
+    body: JSON.stringify({ imageKey }),
   });
 };
 
 export const deleteParcel = async (id: number, token: string) => {
   const url = `${BASE_URL}/api/admin/parcels/${id}`;
   return fetchData(url, {
-    method: 'DELETE',
+    method: "DELETE",
     headers: {
-      'Authorization': `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   });
 };
 
@@ -106,55 +122,53 @@ export const deleteParcel = async (id: number, token: string) => {
 export const getUserById = async (id: number, token: string) => {
   const url = `${BASE_URL}/api/admin/users/${id}`;
   return fetchData(url, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Authorization': `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   });
 };
 
 export const getAllUsers = async (token: string) => {
   const url = `${BASE_URL}/api/admin/users`;
   return fetchData(url, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Authorization': `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   });
 };
-
 
 export const createUser = async (userData: any, token: string) => {
   const url = `${BASE_URL}/api/admin/users`;
   return fetchData(url, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(userData)
+    body: JSON.stringify(userData),
   });
 };
-
 
 export const updateUser = async (id: number, userData: any, token: string) => {
   const url = `${BASE_URL}/api/admin/users/${id}`;
   return fetchData(url, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(userData)
+    body: JSON.stringify(userData),
   });
 };
 
 export const deleteUser = async (id: number, token: string) => {
   const url = `${BASE_URL}/api/admin/users/${id}`;
   return fetchData(url, {
-    method: 'DELETE',
+    method: "DELETE",
     headers: {
-      'Authorization': `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   });
 };
