@@ -31,7 +31,8 @@
   margin-bottom: 10px;
 }
 
-.leftValue, .rightValue {
+.leftValue,
+.rightValue {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -183,4 +184,33 @@
   color: #333;
   flex: 1;
   text-align: right;
+}
+
+.calculatorContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.calculatorInput label {
+  margin-right: 10px;
+}
+
+.calculatorInput input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.calculatorResult {
+  text-align: right;
+}
+
+.costValue {
+  font-size: 1.2em;
+  font-weight: bold;
 }

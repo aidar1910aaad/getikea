@@ -13,10 +13,9 @@
 
 .content {
   flex: 1;
-  
-  background-color: #fff; 
+
+  background-color: #fff;
   border-radius: 0;
- 
 }
 
 @media (max-width: 768px) {
@@ -27,7 +26,22 @@
   .content {
     margin: 0;
     border: none;
-    border-top: 1px solid #FDC503;
-    border-bottom: 1px solid #FDC503;
+    border-top: 1px solid #fdc503;
+    border-bottom: 1px solid #fdc503;
   }
+}
+
+.whatsappButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25d366;
+  color: white;
+  padding: 8px;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
