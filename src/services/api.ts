@@ -1,7 +1,7 @@
 // services/api.ts
 import { Item } from "../types";
 
-const BASE_URL = "https://smartshipping.vercel.app";
+const BASE_URL = "https://getikea.vercel.app";
 
 export const login = async (email: string, password: string) => {
   try {
@@ -82,17 +82,14 @@ export const addParcels = async (token: string, items: Item[]) => {
     const payload = { items };
     console.log("Отправляемый payload:", payload);
 
-    const response = await fetch(
-      "https://smartshipping.vercel.app/api/me/parcels",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(payload),
-      }
-    );
+    const response = await fetch("https://getikea.vercel.app/api/me/parcels", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(payload),
+    });
 
     if (!response.ok) {
       const errorDetails = await response.text();

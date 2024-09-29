@@ -1,6 +1,6 @@
 import { Item } from "@/types";
 
-const BASE_URL = "https://smartshipping.vercel.app";
+const BASE_URL = "https://getikea.vercel.app";
 
 const fetchData = async (url: string, options: RequestInit) => {
   try {
