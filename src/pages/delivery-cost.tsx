@@ -27,8 +27,8 @@ const cities = [
 ];
 
 const DeliveryCostPage: React.FC = () => {
-  const [weight, setWeight] = useState(0.5);
-  const [cost, setCost] = useState(weight * 13);
+  const [weight, setWeight] = useState(1);
+  const [cost, setCost] = useState(weight * 5.5);
   const [courierWeight, setCourierWeight] = useState(0.5);
   const [courierCost, setCourierCost] = useState(0); // Примерное значение стоимости курьера
   const [totalCost, setTotalCost] = useState(0); // Общая стоимость в тенге
@@ -111,7 +111,7 @@ const DeliveryCostPage: React.FC = () => {
       <div className={styles.container}>
         <h1>Рассчитайте стоимость доставки</h1>
         <p className={styles.description}>
-          Тарифы Smart Shipping для перевозки товаров IKEA из Китая в Казахстан
+          Тарифы Smart Shipping для перевозки товаров IKEA из Китая в Алматы
         </p>
 
         <table>
